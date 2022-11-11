@@ -21,6 +21,12 @@ export default function Home() {
         </p>
 
         <div className={styles.grid}>
+          <Link href="/chess" className={styles.card}>
+            <h2>Chess Game &rarr;</h2>
+            <p>Play a game of chess with AI</code></p>
+          </Link>
+
+        <div className={styles.grid}>
           <a href="https://nextjs.org/docs" className={styles.card}>
             <h2>Documentation &rarr;</h2>
             <p>Find in-depth information about Next.js features and API.</p>
