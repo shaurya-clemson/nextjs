@@ -55,7 +55,8 @@ const onClick = ( event ) => {
     console.log('clicked ' + square);
     console.log(selected);
 
-    if (selected && gameState?.moves[selected]?.includes(square)) {
+    if (selected && gameState.moves[selected].includes(square)) {
+      // move the piece
       game.move(selected, square);
       gameState.moves[selected].forEach(option => {
         const el = document.getElementById(option);
@@ -71,22 +72,22 @@ const onClick = ( event ) => {
       selected = null;
       // ai move
       const [movedFrom, movedTo] = Object.entries(game.aiMove())[0];
-      // update the ai's piece by clearing out the old square
+      // update the text by clearing out the old square for AI 
       document.getElementById(movedFrom).innerText = "";
-      // and putting the ai's piece on the new square
+      // and putting the piece on the new square for AI
       document.getElementById(movedTo).innerText = GLYPHS[gameState.pieces[movedTo]];
       gameState = game.exportJson();
     }
     else if (gameState.moves[square] != selected && selected) {
-      gameState?.moves[selected]?.forEach(option => {
+      gameState.moves[selected].forEach(option => {
         const el = document.getElementById(option);
         console.log('removing');
         el.classList.remove(styles.isMoveOption);
       })
-      // gameState = game.exportJson();
+
       console.log(selected);
       selected = square;
-      gameState?.moves[square]?.forEach(option => {
+      gameState.moves[square].forEach(option => {
         const el = document.getElementById(option);
         el.classList.add(styles.isMoveOption);
       })
@@ -95,12 +96,11 @@ const onClick = ( event ) => {
       // clicked on a piece that can move,
       // set the selection to that piece
       selected = square;
-      // console.log(styles);
-      gameState?.moves[square]?.forEach(option => {
+
+      gameState.moves[square].forEach(option => {
         const el = document.getElementById(option);
         el.classList.add(styles.isMoveOption);
       })
-      // selected = null;
     }
     else if (selected) {
       // they tried to move a piece to a random spot on the board
